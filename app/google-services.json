@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "912962819050",
+    "project_id": "app-redresidencial",
+    "storage_bucket": "app-redresidencial.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912962819050:android:02ad93470025e0d77c1893",
+        "android_client_info": {
+          "package_name": "com.example.app_redresidencial"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeVC-2JLLx0_fJsCoebpqBKw4EwHt0fhE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
