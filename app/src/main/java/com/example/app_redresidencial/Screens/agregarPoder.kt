@@ -23,7 +23,82 @@ import com.example.app_redresidencial.ViewModel.PropiedadesViewModel
 import androidx.compose.runtime.collectAsState
 
 @Composable
-fun agregarPoder(agregarPoderViewModel: AgregarPoderViewModel, navController: NavHostController, propiedadesViewModel: PropiedadesViewModel){
+fun agregarPoder(
+    agregarPoderViewModel: AgregarPoderViewModel,
+    navController: NavHostController,
+    propiedadesViewModel: PropiedadesViewModel
+) {
+    BaseScreen(title = "Agregar Poder", navController = navController) { paddingValues ->
+        var poder by remember { mutableStateOf("") }
+        var mensaje by remember { mutableStateOf("") }
+
+        //val usuarioActual by propiedadesViewModel.usuarioActual.collectAsState()
+        //var propietarioId by remember { mutableStateOf(usuarioActual?.identificacion ?: "") }
+        val cedulaActual by propiedadesViewModel.cedulaActual.collectAsState()
+        var propietarioId by remember { mutableStateOf(cedulaActual ?: "") }
+
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            OutlinedTextField(
+                value = propietarioId,
+                onValueChange = { propietarioId = it },
+                label = { Text("Identificación del propietario") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+            OutlinedTextField(
+                value = poder,
+                onValueChange = { poder = it },
+                label = { Text("Poder") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Button(
+                onClick = {
+                    agregarPoderViewModel.agregarPoder(propietarioId, poder)
+                    mensaje = "El poder $poder fue agregado con éxito"
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Agregar Poder")
+            }
+
+            Button(
+                onClick = {
+                    navController.navigate("datos-usuario")
+                }
+            ) {
+                Text("Continuar")
+            }
+
+            // Mostrar mensaje de éxito
+            if (mensaje.isNotEmpty()) {
+                Spacer(modifier = Modifier.padding(16.dp))
+                Text(
+                    text = mensaje,
+                    modifier = Modifier.padding(8.dp),
+                    color = androidx.compose.ui.graphics.Color.Magenta
+                )
+            }
+        }
+    }
+}
+
+
+/*@Composable
+fun agregarPoder(
+    agregarPoderViewModel: AgregarPoderViewModel,
+    navController: NavHostController,
+    propiedadesViewModel: PropiedadesViewModel,
+){
     var poder by remember { mutableStateOf("") }
     var mensaje by remember { mutableStateOf("") }
 
@@ -63,8 +138,9 @@ fun agregarPoder(agregarPoderViewModel: AgregarPoderViewModel, navController: Na
 
         Button(
             onClick = {
-                navController.navigate("")
+                navController.navigate("datos-usuario")
             }) {
+            Text("Continuar")
 
         }
 
@@ -78,4 +154,4 @@ fun agregarPoder(agregarPoderViewModel: AgregarPoderViewModel, navController: Na
             )
         }
     }
-}
+}*/
