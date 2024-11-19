@@ -20,6 +20,7 @@ import com.example.app_redresidencial.Screens.consultarUsuario
 import com.example.app_redresidencial.Screens.datosUsuarioPresente
 import com.example.app_redresidencial.Screens.home
 import com.example.app_redresidencial.Screens.loginAdminScreen
+import com.example.app_redresidencial.Screens.vistaUsuario
 import com.example.app_redresidencial.ViewModel.AgregarPoderViewModel
 import com.example.app_redresidencial.ViewModel.PropiedadesViewModel
 import com.tuapp.viewmodel.CodigoViewModel
@@ -46,6 +47,11 @@ fun NavigationApp(
                 println("Cedula Actual: $cedulaActual")
             }
             datosUsuarioPresente(navController, propiedadesViewModel) }
+        composable("vista-usuario/{codigo}") { backStackEntry ->
+            val codigo = backStackEntry.arguments?.getString("codigo") ?: ""
+            vistaUsuario(navController = navController, codigoViewModel = codigoViewModel, codigo = codigo)
+        }
+
         composable(Routes.PantallaInicio.route) { PantallaInicio(navController, propiedadesViewModel) }
         composable(Routes.PantallaIngresarUsuario.route) { PantallaIngresarUsuario(propiedadesViewModel, navController) }
         composable(Routes.PantallaCronometro.route) { PantallaCronometro(navController) }

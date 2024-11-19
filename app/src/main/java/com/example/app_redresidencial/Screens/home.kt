@@ -88,8 +88,8 @@ fun home(navController: NavController, codigoViewModel: CodigoViewModel) {
                 Text(text = "Acceder", color = Color.White)
             }
 
-            if (codigoValido) {
-                navController.navigate("datos-usuario") // Navegar a la nueva pantalla
+            if (codigoValido && usuarioAsociado != null) {
+                navController.navigate("vista-usuario/${code.value}") // Pasar el código como argumento
             }
         }
 
